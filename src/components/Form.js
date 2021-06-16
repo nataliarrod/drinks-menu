@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import { CategoriesContext } from "../context/ContextCategories";
+import { RecipesContext } from "../context/RecipesContext";
 
 const Form = () => {
-  const {categories} = useContext(CategoriesContext);
   const [search, setSearch] = useState({
     name: '',
     category: '',
   });
+
+  const {categories} = useContext(CategoriesContext);
+  const {setSearch: setSearchContext, setConsult} = useContext(RecipesContext);
+
   const getDataRecipe = e => {
     setSearch({
       ...search,
@@ -15,7 +19,14 @@ const Form = () => {
   }
 
   return (
-    <form className="col-12">
+    <form 
+      className="col-12"
+      onSubmit={e=> {
+        e.preventDefault();
+        setSearchContext(search);
+        setConsult(true);
+      }}
+    >
       <fieldset className="text-center">
         <legend>Search drinks for categories or ingredients</legend>
       </fieldset>
