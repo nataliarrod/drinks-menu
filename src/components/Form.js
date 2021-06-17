@@ -4,24 +4,24 @@ import { RecipesContext } from "../context/RecipesContext";
 
 const Form = () => {
   const [search, setSearch] = useState({
-    name: '',
-    category: '',
+    name: "",
+    category: "",
   });
 
-  const {categories} = useContext(CategoriesContext);
-  const {setSearch: setSearchContext, setConsult} = useContext(RecipesContext);
+  const { categories } = useContext(CategoriesContext);
+  const { setSearchContext, setConsult } = useContext(RecipesContext);
 
-  const getDataRecipe = e => {
+  const getDataRecipe = (e) => {
     setSearch({
       ...search,
-      [e.target.name] : e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
-    <form 
+    <form
       className="col-12"
-      onSubmit={e=> {
+      onSubmit={(e) => {
         e.preventDefault();
         setSearchContext(search);
         setConsult(true);
@@ -42,18 +42,16 @@ const Form = () => {
           />
         </div>
         <div>
-          <select 
-            className="form-control" 
+          <select
+            className="form-control"
             name="category"
             onChange={getDataRecipe}
           >
             <option value="">--Select a category--</option>
-            {categories.map(category => (
-              <option 
-                key={category.strCategory}
-                value={category.strCategory}
-              >
-              {category.strCategory}</option>
+            {categories.map((category) => (
+              <option key={category.strCategory} value={category.strCategory}>
+                {category.strCategory}
+              </option>
             ))}
           </select>
         </div>
